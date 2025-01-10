@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://digdesslh3qd7"]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="3_io8qr"]
+[ext_resource type="PackedScene" uid="uid://c40cow8obdl5y" path="res://scenes/hand.tscn" id="4_hb1u2"]
+
+[node name="Game" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("3_io8qr")
+
+[node name="Button" type="Button" parent="GameManager"]
+texture_filter = 1
+offset_left = 16.0
+offset_top = 15.0
+offset_right = 147.0
+offset_bottom = 46.0
+text = "Add knight card
+"
+
+[node name="Hand" parent="." instance=ExtResource("4_hb1u2")]
+position = Vector2(597, 480)
+
+[connection signal="card_added_hand" from="GameManager" to="Hand" method="_on_game_manager_card_added_hand"]
+[connection signal="pressed" from="GameManager/Button" to="GameManager" method="_on_button_pressed"]

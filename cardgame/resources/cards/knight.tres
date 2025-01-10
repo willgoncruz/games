@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardStats" load_steps=3 format=3 uid="uid://bm478sh0h2bsu"]
+
+[ext_resource type="Script" path="res://scripts/stats/card_stats.gd" id="1_vpbaa"]
+[ext_resource type="Texture2D" uid="uid://b0t21e0rdpw6r" path="res://assets/sprites/cover.png" id="2_lvp44"]
+
+[resource]
+script = ExtResource("1_vpbaa")
+cost = 3
+name = "Knight"
+description = ""
+sprite = ExtResource("2_lvp44")
