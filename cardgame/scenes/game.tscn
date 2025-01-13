@@ -1,14 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://digdesslh3qd7"]
+[gd_scene load_steps=8 format=3 uid="uid://digdesslh3qd7"]
 
+[ext_resource type="Script" path="res://scripts/input_manager.gd" id="1_eocp6"]
+[ext_resource type="Script" path="res://scripts/raycast.gd" id="2_fw18g"]
+[ext_resource type="PackedScene" uid="uid://dht62mq02yn67" path="res://scenes/deck.tscn" id="3_8hbcr"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="3_io8qr"]
 [ext_resource type="PackedScene" uid="uid://c40cow8obdl5y" path="res://scenes/hand.tscn" id="4_hb1u2"]
+[ext_resource type="PackedScene" uid="uid://df03qpbhrpasr" path="res://scenes/play_area.tscn" id="5_mtdi2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wq3do"]
+size = Vector2(1597, 408.5)
 
 [node name="Game" type="Node2D"]
+
+[node name="InputManager" type="Node2D" parent="."]
+script = ExtResource("1_eocp6")
+
+[node name="HandRaycast" type="RayCast2D" parent="InputManager"]
+script = ExtResource("2_fw18g")
+
+[node name="DeckRaycast" type="RayCast2D" parent="InputManager"]
+collision_mask = 2
+script = ExtResource("2_fw18g")
+
+[node name="PlayArea" type="RayCast2D" parent="InputManager"]
+collision_mask = 4
+script = ExtResource("2_fw18g")
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("3_io8qr")
 
-[node name="Button" type="Button" parent="GameManager"]
+[node name="Add Card" type="Button" parent="GameManager"]
 texture_filter = 1
 offset_left = 16.0
 offset_top = 15.0
@@ -17,8 +38,34 @@ offset_bottom = 46.0
 text = "Add knight card
 "
 
-[node name="Hand" parent="." instance=ExtResource("4_hb1u2")]
-position = Vector2(597, 480)
+[node name="Snapback" type="Button" parent="GameManager"]
+texture_filter = 1
+offset_left = 18.0
+offset_top = 56.0
+offset_right = 26.0
+offset_bottom = 64.0
+text = "Snapback"
 
-[connection signal="card_added_hand" from="GameManager" to="Hand" method="_on_game_manager_card_added_hand"]
-[connection signal="pressed" from="GameManager/Button" to="GameManager" method="_on_button_pressed"]
+[node name="Hand" parent="." instance=ExtResource("4_hb1u2")]
+position = Vector2(800, 690)
+
+[node name="Deck" parent="." instance=ExtResource("3_8hbcr")]
+position = Vector2(150, 700)
+
+[node name="PlayArea" parent="." instance=ExtResource("5_mtdi2")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2(798.5, 204.75)
+shape = SubResource("RectangleShape2D_wq3do")
+
+[connection signal="interact_deck" from="InputManager" to="Deck" method="_on_input_manager_interact_deck"]
+[connection signal="interact_hand" from="InputManager" to="Hand" method="_on_input_manager_interact_hand"]
+[connection signal="mouse_released" from="InputManager" to="Hand" method="_on_input_manager_mouse_released"]
+[connection signal="play_card_area_released" from="InputManager" to="Hand" method="_on_play_card_area_released"]
+[connection signal="interact" from="InputManager/HandRaycast" to="InputManager" method="_on_hand_raycast_interact"]
+[connection signal="interact" from="InputManager/DeckRaycast" to="InputManager" method="_on_deck_raycast_interact"]
+[connection signal="interact" from="InputManager/PlayArea" to="InputManager" method="_on_play_area_interact"]
+[connection signal="card_added_hand" from="GameManager" to="Deck" method="_on_game_manager_card_added_hand"]
+[connection signal="pressed" from="GameManager/Add Card" to="GameManager" method="_on_button_pressed"]
+[connection signal="pressed" from="GameManager/Snapback" to="GameManager" method="_on_snapback_pressed"]
+[connection signal="draw_card" from="Deck" to="Hand" method="_on_deck_draw_card"]

@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dht62mq02yn67"]
+
+[ext_resource type="Texture2D" uid="uid://bhu7p7hivgcfw" path="res://assets/sprites/card_back.png" id="1_dw2t2"]
+[ext_resource type="Script" path="res://scripts/deck.gd" id="1_rslm0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txjhw"]
+size = Vector2(728, 1030)
+
+[node name="Deck" type="Node2D"]
+script = ExtResource("1_rslm0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.28, 0.28)
+texture = ExtResource("1_dw2t2")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("RectangleShape2D_txjhw")
+
+[node name="Count" type="Label" parent="."]
+texture_filter = 1
+offset_left = -27.0
+offset_top = 25.0
+offset_right = 87.0
+offset_bottom = 298.0
+theme_override_font_sizes/font_size = 100
+text = "0"
