@@ -5,3 +5,6 @@ extends Resource
 @export var name: String = ""
 @export var description: String = ""
 @export var sprite: Texture2D
+
+# Ranges that the card attacks on board
+@export var attack: AttackStats

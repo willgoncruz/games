@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AttackStats" load_steps=2 format=3 uid="uid://gl8p71fyavi1"]
+
+[ext_resource type="Script" path="res://scripts/stats/attack_stats.gd" id="1_fgeua"]
+
+[resource]
+script = ExtResource("1_fgeua")
+damage = 10
+range = Array[Vector2]([Vector2(2, 0), Vector2(2, 1), Vector2(2, -1)])

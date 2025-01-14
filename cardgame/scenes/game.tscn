@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://digdesslh3qd7"]
+[gd_scene load_steps=10 format=3 uid="uid://digdesslh3qd7"]
 
 [ext_resource type="Script" path="res://scripts/input_manager.gd" id="1_eocp6"]
 [ext_resource type="Script" path="res://scripts/raycast.gd" id="2_fw18g"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="3_io8qr"]
 [ext_resource type="PackedScene" uid="uid://c40cow8obdl5y" path="res://scenes/hand.tscn" id="4_hb1u2"]
 [ext_resource type="PackedScene" uid="uid://df03qpbhrpasr" path="res://scenes/play_area.tscn" id="5_mtdi2"]
+[ext_resource type="PackedScene" uid="uid://dtp5skh44ht80" path="res://scenes/player.tscn" id="6_26p62"]
+[ext_resource type="PackedScene" uid="uid://bupdpck0yhd12" path="res://scenes/board.tscn" id="7_0wl6g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wq3do"]
 size = Vector2(1597, 408.5)
@@ -38,23 +40,23 @@ offset_bottom = 46.0
 text = "Add knight card
 "
 
-[node name="Snapback" type="Button" parent="GameManager"]
-texture_filter = 1
-offset_left = 18.0
-offset_top = 56.0
-offset_right = 26.0
-offset_bottom = 64.0
-text = "Snapback"
-
 [node name="Hand" parent="." instance=ExtResource("4_hb1u2")]
 position = Vector2(800, 690)
 
 [node name="Deck" parent="." instance=ExtResource("3_8hbcr")]
 position = Vector2(150, 700)
 
+[node name="Board" parent="." instance=ExtResource("7_0wl6g")]
+z_index = -1
+position = Vector2(237, 50)
+
+[node name="Player" parent="Board" instance=ExtResource("6_26p62")]
+
 [node name="PlayArea" parent="." instance=ExtResource("5_mtdi2")]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
+visible = false
 position = Vector2(798.5, 204.75)
 shape = SubResource("RectangleShape2D_wq3do")
 
@@ -67,5 +69,4 @@ shape = SubResource("RectangleShape2D_wq3do")
 [connection signal="interact" from="InputManager/PlayArea" to="InputManager" method="_on_play_area_interact"]
 [connection signal="card_added_hand" from="GameManager" to="Deck" method="_on_game_manager_card_added_hand"]
 [connection signal="pressed" from="GameManager/Add Card" to="GameManager" method="_on_button_pressed"]
-[connection signal="pressed" from="GameManager/Snapback" to="GameManager" method="_on_snapback_pressed"]
 [connection signal="draw_card" from="Deck" to="Hand" method="_on_deck_draw_card"]

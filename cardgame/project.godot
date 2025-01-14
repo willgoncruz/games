@@ -15,7 +15,15 @@ run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SignalBus="*res://scripts/global/signal_bus.gd"
+
 [display]
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

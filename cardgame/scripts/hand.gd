@@ -73,5 +73,12 @@ func update_hand_fanning():
 
 
 func _on_play_card_area_released() -> void:
+	if !card_dragged:
+		return
+
+	SignalBus.play_card.emit(card_dragged)
+
 	hand.erase(card_dragged)
+	highlighted.erase(card_dragged)
+	card_dragged.queue_free()
 	card_dragged = null
