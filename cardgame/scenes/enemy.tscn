@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://cx64spfuah250"]
+
+[ext_resource type="Texture2D" uid="uid://hmi5fjvrohxv" path="res://assets/sprites/slime_purple.png" id="1_mnoxm"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_redby"]
+[ext_resource type="Script" path="res://scripts/component/health.gd" id="2_63t2w"]
+[ext_resource type="Script" path="res://scripts/component/movement.gd" id="4_vqfxr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m55cb"]
+atlas = ExtResource("1_mnoxm")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_st03g"]
+atlas = ExtResource("1_mnoxm")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfj07"]
+atlas = ExtResource("1_mnoxm")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urkby"]
+atlas = ExtResource("1_mnoxm")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_66i3p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m55cb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_st03g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfj07")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urkby")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("health", "movement")]
+scale = Vector2(3, 3)
+script = ExtResource("1_redby")
+health = NodePath("HealthComponent")
+movement = NodePath("MovementComponent")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_66i3p")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.218613
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("2_63t2w")
+
+[node name="MovementComponent" type="Node2D" parent="."]
+script = ExtResource("4_vqfxr")

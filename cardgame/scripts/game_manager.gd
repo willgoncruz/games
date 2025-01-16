@@ -1,6 +1,7 @@
 extends Node
 
 const KNIGHT = preload("res://resources/cards/knight.tres")
+const LASER = preload("res://resources/cards/laser.tres")
 const CARD_SCENE  = preload("res://scenes/card.tscn")
 
 signal card_added_hand(card: CardScene)

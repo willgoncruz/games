@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AttackStats" load_steps=3 format=3 uid="uid://bo0c3j6jxilgi"]
+
+[ext_resource type="Script" path="res://scripts/stats/attack_stats.gd" id="1_bxbht"]
+[ext_resource type="Resource" uid="uid://dwe6o3wy2jeer" path="res://resources/ranges/tall.tres" id="1_g6w1o"]
+
+[resource]
+script = ExtResource("1_bxbht")
+damage = 20
+range = ExtResource("1_g6w1o")

@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtp5skh44ht80"]
+[gd_scene load_steps=11 format=3 uid="uid://dtp5skh44ht80"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_vg6tp"]
 [ext_resource type="Texture2D" uid="uid://dxygp37hn18nh" path="res://assets/sprites/knight.png" id="2_ul2u3"]
+[ext_resource type="Script" path="res://scripts/component/health.gd" id="3_agm4w"]
+[ext_resource type="Script" path="res://scripts/component/movement.gd" id="4_jm4by"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vmfhj"]
 atlas = ExtResource("2_ul2u3")
@@ -42,15 +44,17 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_dvowb"]
 radius = 8.0
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("health", "movement")]
 scale = Vector2(3, 3)
 script = ExtResource("1_vg6tp")
+health = NodePath("HealthComponent")
+movement = NodePath("MovementComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_egiv2")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.394864
+frame_progress = 0.241696
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -58,3 +62,9 @@ frame_progress = 0.394864
 visible = false
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_dvowb")
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("3_agm4w")
+
+[node name="MovementComponent" type="Node2D" parent="."]
+script = ExtResource("4_jm4by")

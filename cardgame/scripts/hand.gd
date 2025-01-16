@@ -10,8 +10,7 @@ var card_dragged: CardScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	SignalBus.draw_card.connect(_on_deck_draw_card)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -47,6 +46,9 @@ func drag_card():
 		)
 
 func _on_deck_draw_card(card: CardScene) -> void:
+	if card == null:
+		return
+
 	hand.push_back(card)
 	card.hover.connect(self.hover_card)
 	card.blur.connect(self.blur_card)
@@ -76,6 +78,7 @@ func _on_play_card_area_released() -> void:
 	if !card_dragged:
 		return
 
+	highlighted.erase(card_dragged)
 	SignalBus.play_card.emit(card_dragged)
 
 	hand.erase(card_dragged)

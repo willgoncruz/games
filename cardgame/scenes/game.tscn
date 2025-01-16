@@ -12,7 +12,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wq3do"]
 size = Vector2(1597, 408.5)
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" groups=["board", "enemies"]]
 
 [node name="InputManager" type="Node2D" parent="."]
 script = ExtResource("1_eocp6")
@@ -69,4 +69,3 @@ shape = SubResource("RectangleShape2D_wq3do")
 [connection signal="interact" from="InputManager/PlayArea" to="InputManager" method="_on_play_area_interact"]
 [connection signal="card_added_hand" from="GameManager" to="Deck" method="_on_game_manager_card_added_hand"]
 [connection signal="pressed" from="GameManager/Add Card" to="GameManager" method="_on_button_pressed"]
-[connection signal="draw_card" from="Deck" to="Hand" method="_on_deck_draw_card"]

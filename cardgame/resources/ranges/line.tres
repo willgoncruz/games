@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="GridRange" load_steps=2 format=3 uid="uid://bi21y2uj27q5c"]
+
+[ext_resource type="Script" path="res://scripts/stats/range.gd" id="1_b4qdy"]
+
+[resource]
+script = ExtResource("1_b4qdy")
+range = Array[Vector2i]([Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0)])
