@@ -32,12 +32,14 @@ func _ready() -> void:
 	
 	for i in BOARD_SIZE.y:
 		var enemy = EnemyScene.instantiate()
+		enemy.stats = preload("res://resources/units/slime.tres")
 		enemy.movement.shift(Vector2i(3, i))
 		enemies.push_back(enemy)
 		move_entity_to_board_position(enemy)
 		add_child(enemy)
 	
 	SignalBus.play_card.connect(play_card)
+	SignalBus.enemy_act.connect(enemy_act)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -83,4 +85,13 @@ func play_card(card: CardScene):
 
 	get_tree().call_group("enemies", "hit", damage)
 	get_tree().call_group("board", "attack_highlight", damage)
+	get_tree().call_group("enemies", "turn_countdown", 1)
+
+### TODO RACE CONDITION OF BEING HIT AND ENEMY ACT, CREATE SAFEGUARD
+func enemy_act(enemy: Enemy):
+	var damage: DamageStats = DamageStats.enemy_action(enemy)
 	
+	get_tree().call_group("player", "hit", damage)
+	get_tree().call_group("board", "attack_highlight", damage)
+
+	enemy.reset_action()

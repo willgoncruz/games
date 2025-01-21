@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=2 format=3 uid="uid://cundypxo5in37"]
+
+[ext_resource type="Script" path="res://scripts/stats/unit_stats.gd" id="1_ollcy"]
+
+[resource]
+script = ExtResource("1_ollcy")
+name = "Player"
+max_health = 500

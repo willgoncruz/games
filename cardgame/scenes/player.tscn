@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dtp5skh44ht80"]
+[gd_scene load_steps=12 format=3 uid="uid://dtp5skh44ht80"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_vg6tp"]
+[ext_resource type="Resource" uid="uid://cundypxo5in37" path="res://resources/units/player.tres" id="2_1ii8p"]
 [ext_resource type="Texture2D" uid="uid://dxygp37hn18nh" path="res://assets/sprites/knight.png" id="2_ul2u3"]
 [ext_resource type="Script" path="res://scripts/component/health.gd" id="3_agm4w"]
 [ext_resource type="Script" path="res://scripts/component/movement.gd" id="4_jm4by"]
@@ -49,6 +50,7 @@ scale = Vector2(3, 3)
 script = ExtResource("1_vg6tp")
 health = NodePath("HealthComponent")
 movement = NodePath("MovementComponent")
+stats = ExtResource("2_1ii8p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_egiv2")
