@@ -18,6 +18,9 @@ func _ready() -> void:
 		new_card = CARD_SCENE.instantiate()
 		new_card.stats = LASER
 		_on_game_manager_card_added_hand(new_card)
+		
+		draw_card_from_deck()
+		draw_card_from_deck()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

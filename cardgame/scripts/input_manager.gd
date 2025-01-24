@@ -14,7 +14,7 @@ signal play_card_area_released()
 @onready var play_area_raycast = $PlayArea
 
 @onready var on_mouse_click_raycasts: Array[MouseRaycast] = [
-	hand_raycast,
+	#hand_raycast,
 	deck_raycast,
 ]
 
@@ -30,24 +30,27 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _input(event: InputEvent) -> void:
-	if event is not InputEventMouseButton:
-		return
-	
-	var mouse_event: InputEventMouseButton = event
-	if mouse_event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
-			for r in on_mouse_click_raycasts:
-				r.raycast_at_cursor()
-		else:
-			for r in on_mouse_released_raycasts:
-				r.raycast_at_cursor()
-
-			mouse_released.emit()
+#func _input(event: InputEvent) -> void:
+	#print("INPUT MANAGER")
+	#pass
+	#if event is not InputEventMouseButton:
+		#return
+	#
+	#var mouse_event: InputEventMouseButton = event
+	#if mouse_event.button_index == MOUSE_BUTTON_LEFT:
+		#if event.pressed:
+			#for r in on_mouse_click_raycasts:
+				#r.raycast_at_cursor()
+		#else:
+			#for r in on_mouse_released_raycasts:
+				#r.raycast_at_cursor()
+#
+			#mouse_released.emit()
 
 
 func _on_hand_raycast_interact(node: Node2D) -> void:
-	interact_hand.emit(node as CardScene)
+	pass
+	#interact_hand.emit(node as CardScene)
 
 
 func _on_deck_raycast_interact(node: Node2D) -> void:

@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @export var HAND_SIZE = 400.0
 
@@ -6,27 +6,18 @@ const horizontal_curve: Curve = preload("res://resources/horizontal_spacing_curv
 
 var hand: Array[CardScene]
 var highlighted: Array[CardScene]
-var card_dragged: CardScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SignalBus.draw_card.connect(_on_deck_draw_card)
+	SignalBus.play_card.connect(_on_play_card)
+	SignalBus.unhand_card.connect(_on_unhand_card)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Highlight the current card in mouse position
 	highlight_current_card()
-	
-	# Drag the current card 
-	drag_card()
 
-func _on_input_manager_interact_hand(card: CardScene) -> void:
-	card_dragged = card
-	
-func _on_input_manager_mouse_released() -> void:
-	update_hand_fanning()
-	card_dragged = null
-	
 func highlight_current_card():
 	var highest_index_highlight = -1
 	for card in highlighted:
@@ -36,14 +27,13 @@ func highlight_current_card():
 	if highest_index_highlight in range(hand.size()):
 		hand[highest_index_highlight].highlight()
 
-func drag_card():
-	if card_dragged:
-		var viewport = get_viewport_rect().size
-		var mouse_pos = get_global_mouse_position()
-		card_dragged.global_position = Vector2(
-			clamp(mouse_pos.x, 0, viewport.x),
-			clamp(mouse_pos.y, 0, viewport.y),
-		)
+func _on_play_card(card: CardScene) -> void:
+	hand.erase(card)
+	card.queue_free()
+	update_hand_fanning()
+
+func _on_unhand_card(_card: CardScene) -> void:
+	update_hand_fanning()
 
 func _on_deck_draw_card(card: CardScene) -> void:
 	if card == null:
@@ -72,15 +62,3 @@ func update_hand_fanning():
 			var new_position = Vector2(horizontal_curve.sample(hand_ratio) * HAND_SIZE, 0)
 			card.unhighlight()
 			card.animate_to_position(new_position)
-
-
-func _on_play_card_area_released() -> void:
-	if !card_dragged:
-		return
-
-	hand.erase(card_dragged)
-	highlighted.erase(card_dragged)
-	SignalBus.play_card.emit(card_dragged)
-
-	card_dragged.queue_free()
-	card_dragged = null

@@ -14,6 +14,12 @@ size = Vector2(1597, 408.5)
 
 [node name="Game" type="Node2D" groups=["board", "enemies"]]
 
+[node name="Hand" parent="." instance=ExtResource("4_hb1u2")]
+offset_left = 800.0
+offset_top = 690.0
+offset_right = 800.0
+offset_bottom = 690.0
+
 [node name="InputManager" type="Node2D" parent="."]
 script = ExtResource("1_eocp6")
 
@@ -39,9 +45,6 @@ offset_right = 147.0
 offset_bottom = 46.0
 text = "Add knight card
 "
-
-[node name="Hand" parent="." instance=ExtResource("4_hb1u2")]
-position = Vector2(800, 690)
 
 [node name="Deck" parent="." instance=ExtResource("3_8hbcr")]
 position = Vector2(150, 700)
