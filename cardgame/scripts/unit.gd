@@ -9,16 +9,12 @@ class_name Unit
 func init() -> void:
 	add_to_group("units")
 
-	health.init(stats.max_health)
 	health.died.connect(_on_unit_death)
+	health.init(stats.max_health)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-func hit(damage: DamageStats):
-	if damage.range.contains(movement.board_position()):
-		health.damage(damage)
 
 func _on_unit_death():
 	print("UNIT %s has died" % stats.name)

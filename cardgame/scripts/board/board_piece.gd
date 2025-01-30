@@ -30,8 +30,8 @@ func enemy_board_piece():
 	self.usuable = false
 	self.modulate = Color(0.8, 0, 0)
 
-func attack_highlight(damage: DamageStats):
-	if damage.range.contains(grid_base):
+func attack_highlight(range: GridRange):
+	if range.contains(grid_base):
 		self.modulate = Color(0, 0.8, 0.2)
 
 func unhighlight():

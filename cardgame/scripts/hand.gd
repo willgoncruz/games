@@ -60,5 +60,6 @@ func update_hand_fanning():
 		if hand.size() > 1:
 			var hand_ratio = float(i) / (hand.size() - 1)
 			var new_position = Vector2(horizontal_curve.sample(hand_ratio) * HAND_SIZE, 0)
+			card.z_index = hand.size() - i
 			card.unhighlight()
 			card.animate_to_position(new_position)

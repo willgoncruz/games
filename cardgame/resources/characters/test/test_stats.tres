@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=3 format=3 uid="uid://br1faok38j72t"]
+
+[ext_resource type="Script" path="res://scripts/stats/character_stats.gd" id="1_2hicu"]
+[ext_resource type="Resource" uid="uid://brpopl5hapwoc" path="res://resources/characters/test/test_deck.tres" id="2_3d7fx"]
+
+[resource]
+script = ExtResource("1_2hicu")
+max_mana = 0
+starting_deck = ExtResource("2_3d7fx")
+name = "Test Character"
+max_block = 0
+max_health = 100
+initial_block = 0

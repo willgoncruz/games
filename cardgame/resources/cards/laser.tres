@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=4 format=3 uid="uid://duuhwwxkaum2r"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://duuhwwxkaum2r"]
 
-[ext_resource type="Script" path="res://scripts/stats/card_stats.gd" id="1_lgl5c"]
-[ext_resource type="Resource" uid="uid://gl8p71fyavi1" path="res://resources/cards/line_attack.tres" id="1_u6rvf"]
+[ext_resource type="Resource" uid="uid://bi21y2uj27q5c" path="res://resources/ranges/line.tres" id="1_mkslu"]
 [ext_resource type="Texture2D" uid="uid://c561jpofe0w11" path="res://assets/sprites/card_section.png" id="2_qko8h"]
+[ext_resource type="Script" path="res://scripts/card/attack/line_card.gd" id="2_xhi47"]
 
 [resource]
-script = ExtResource("1_lgl5c")
+script = ExtResource("2_xhi47")
+id = 0
 cost = 1
 name = "Laser"
-description = ""
+description = "Laser"
 sprite = ExtResource("2_qko8h")
-attack = ExtResource("1_u6rvf")
+range = ExtResource("1_mkslu")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cx64spfuah250"]
+[gd_scene load_steps=15 format=3 uid="uid://cx64spfuah250"]
 
 [ext_resource type="Texture2D" uid="uid://hmi5fjvrohxv" path="res://assets/sprites/slime_purple.png" id="1_mnoxm"]
 [ext_resource type="Script" path="res://scripts/enemy/enemy.gd" id="1_redby"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://bo0c3j6jxilgi" path="res://resources/cards/tall_attack.tres" id="3_q2wv1"]
 [ext_resource type="Script" path="res://scripts/component/movement.gd" id="4_vqfxr"]
 [ext_resource type="FontFile" uid="uid://coa4077tletcs" path="res://assets/font/PixelOperator8.ttf" id="5_u6exf"]
+[ext_resource type="PackedScene" uid="uid://opt3xxjyeq7i" path="res://scenes/stats_ui.tscn" id="8_a4l58"]
 
 [sub_resource type="Resource" id="Resource_1hioj"]
 script = ExtResource("2_2xtst")
@@ -69,17 +70,30 @@ script = ExtResource("2_63t2w")
 script = ExtResource("4_vqfxr")
 
 [node name="Info" type="HBoxContainer" parent="."]
-offset_left = -7.0
-offset_top = -9.0
-offset_right = 7.0
+offset_left = 7.0
+offset_top = -1.33333
+offset_right = 54.0
+offset_bottom = 7.66667
 size_flags_horizontal = 6
 size_flags_vertical = 0
 
 [node name="TurnCount" type="Label" parent="Info"]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 2
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("5_u6exf")
 theme_override_font_sizes/font_size = 8
-text = "8
-"
+text = "0"
+
+[node name="StatsUI" parent="." instance=ExtResource("8_a4l58")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -22.5
+offset_top = -16.0
+offset_right = 22.5
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0

@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=4 format=3 uid="uid://bm478sh0h2bsu"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://bm478sh0h2bsu"]
 
-[ext_resource type="Resource" uid="uid://bo0c3j6jxilgi" path="res://resources/cards/tall_attack.tres" id="1_tji6g"]
-[ext_resource type="Script" path="res://scripts/stats/card_stats.gd" id="1_vpbaa"]
+[ext_resource type="Resource" uid="uid://dwe6o3wy2jeer" path="res://resources/ranges/tall.tres" id="1_r35wr"]
 [ext_resource type="Texture2D" uid="uid://b0t21e0rdpw6r" path="res://assets/sprites/cover.png" id="2_lvp44"]
+[ext_resource type="Script" path="res://scripts/card/attack/tall_card.gd" id="2_raua4"]
 
 [resource]
-script = ExtResource("1_vpbaa")
+script = ExtResource("2_raua4")
+id = 0
 cost = 3
 name = "Knight"
-description = ""
+description = "Knight"
 sprite = ExtResource("2_lvp44")
-attack = ExtResource("1_tji6g")
+range = ExtResource("1_r35wr")

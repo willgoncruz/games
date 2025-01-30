@@ -4,12 +4,15 @@ class_name Enemy
 @export var actions: Array[EnemyAction]
 
 @onready var turn_display = $Info/TurnCount
+@onready var stats_ui: StatsUI = $StatsUI
 
 var countdown: int
 var current_action: EnemyAction
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	health.health_change.connect(stats_ui.update)
+
 	self.init()
 	add_to_group("enemies")
 

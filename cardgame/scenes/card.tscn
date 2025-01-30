@@ -273,6 +273,7 @@ anchors_preset = 0
 script = ExtResource("1_l8ay8")
 
 [node name="Back" type="Sprite2D" parent="."]
+visible = false
 z_index = 1
 scale = Vector2(0.3, 0.28)
 texture = ExtResource("2_8t5yc")
@@ -294,12 +295,12 @@ collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DropDetector"]
-visible = false
 shape = SubResource("RectangleShape2D_k02e1")
 
 [node name="Cost" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0)
 texture_filter = 1
+layout_mode = 0
 offset_left = -9.0
 offset_top = 68.0
 offset_right = 31.0
@@ -313,6 +314,7 @@ text = "0"
 modulate = Color(1, 1, 1, 0)
 z_index = 1
 texture_filter = 1
+layout_mode = 0
 offset_left = -54.0
 offset_top = -16.0
 offset_right = 14.0
@@ -324,6 +326,7 @@ text = "Teste"
 [node name="Name" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0)
 texture_filter = 1
+layout_mode = 0
 offset_left = -86.0
 offset_top = 116.0
 offset_right = 82.0

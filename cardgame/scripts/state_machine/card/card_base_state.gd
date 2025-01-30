@@ -16,5 +16,6 @@ func on_gui_input(event: InputEvent):
 	var mouse_event: InputEventMouseButton = event
 	if mouse_event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
+			get_viewport().set_input_as_handled()
 			card.pivot_offset = card.get_global_mouse_position() - card.global_position
 			transition.emit(self, CardState.State.CLICKED)

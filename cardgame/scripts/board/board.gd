@@ -80,18 +80,29 @@ func move_entity_to_board_position(node: Node2D):
 func get_board_piece_at(position: Vector2i) -> BoardPiece:
 	return board.filter(func (piece: BoardPiece): return piece.grid_base == position).pop_front()
 
-func play_card(card: CardScene):
-	var damage: DamageStats = DamageStats.from(player, card.stats.attack)
+func get_units() -> Array[Unit]:
+	var units: Array[Unit] = []
+	units.assign(get_tree().get_nodes_in_group("units"))
+	return units
 
-	get_tree().call_group("enemies", "hit", damage)
-	get_tree().call_group("board", "attack_highlight", damage)
+func play_card(card: CardScene):
+	for effect in card.stats.get_effects():
+		var effective_range = card.stats.range.get_active_range(player.movement.board_position())
+		var targets: Array[Unit] = get_units().filter(func (unit: Unit): return effective_range.contains(unit.movement.board_position()))
+	
+		effect.execute(targets)
+		get_tree().call_group("board", "attack_highlight", effective_range)
+
+	#var damage: DamageStats = DamageStats.from(player, card.stats.attack)
+
+	#get_tree().call_group("enemies", "hit", damage)
 	get_tree().call_group("enemies", "turn_countdown", 1)
 
 ### TODO RACE CONDITION OF BEING HIT AND ENEMY ACT, CREATE SAFEGUARD
 func enemy_act(enemy: Enemy):
-	var damage: DamageStats = DamageStats.enemy_action(enemy)
-	
-	get_tree().call_group("player", "hit", damage)
-	get_tree().call_group("board", "attack_highlight", damage)
+	#var damage: DamageStats = DamageStats.enemy_action(enemy)
+	#
+	#get_tree().call_group("player", "hit", damage)
+	#get_tree().call_group("board", "attack_highlight", damage)
 
 	enemy.reset_action()

@@ -9,7 +9,6 @@ func enter() -> void:
 
 	if not card.targets.is_empty():
 		played = true
-		print("CARD PLAYED: ", card.targets)
 		card.play()
 
 func on_input(event: InputEvent) -> void:

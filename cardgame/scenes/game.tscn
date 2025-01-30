@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://digdesslh3qd7"]
+[gd_scene load_steps=11 format=3 uid="uid://digdesslh3qd7"]
 
 [ext_resource type="Script" path="res://scripts/input_manager.gd" id="1_eocp6"]
 [ext_resource type="Script" path="res://scripts/raycast.gd" id="2_fw18g"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://df03qpbhrpasr" path="res://scenes/play_area.tscn" id="5_mtdi2"]
 [ext_resource type="PackedScene" uid="uid://dtp5skh44ht80" path="res://scenes/player.tscn" id="6_26p62"]
 [ext_resource type="PackedScene" uid="uid://bupdpck0yhd12" path="res://scenes/board.tscn" id="7_0wl6g"]
+[ext_resource type="Script" path="res://scripts/player_manager.gd" id="9_ah00i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wq3do"]
 size = Vector2(1597, 408.5)
@@ -34,18 +35,6 @@ script = ExtResource("2_fw18g")
 collision_mask = 4
 script = ExtResource("2_fw18g")
 
-[node name="GameManager" type="Node" parent="."]
-script = ExtResource("3_io8qr")
-
-[node name="Add Card" type="Button" parent="GameManager"]
-texture_filter = 1
-offset_left = 16.0
-offset_top = 15.0
-offset_right = 147.0
-offset_bottom = 46.0
-text = "Add knight card
-"
-
 [node name="Deck" parent="." instance=ExtResource("3_8hbcr")]
 position = Vector2(150, 700)
 
@@ -62,6 +51,21 @@ visible = false
 visible = false
 position = Vector2(798.5, 204.75)
 shape = SubResource("RectangleShape2D_wq3do")
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("3_io8qr")
+
+[node name="Add Card" type="Button" parent="GameManager"]
+texture_filter = 1
+offset_left = 16.0
+offset_top = 15.0
+offset_right = 147.0
+offset_bottom = 46.0
+text = "Add knight card
+"
+
+[node name="PlayerManager" type="Node" parent="."]
+script = ExtResource("9_ah00i")
 
 [connection signal="interact_deck" from="InputManager" to="Deck" method="_on_input_manager_interact_deck"]
 [connection signal="interact_hand" from="InputManager" to="Hand" method="_on_input_manager_interact_hand"]

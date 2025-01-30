@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dtp5skh44ht80"]
+[gd_scene load_steps=13 format=3 uid="uid://dtp5skh44ht80"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_vg6tp"]
-[ext_resource type="Resource" uid="uid://cundypxo5in37" path="res://resources/units/player.tres" id="2_1ii8p"]
+[ext_resource type="Resource" uid="uid://br1faok38j72t" path="res://resources/characters/test/test_stats.tres" id="2_4mfgi"]
 [ext_resource type="Texture2D" uid="uid://dxygp37hn18nh" path="res://assets/sprites/knight.png" id="2_ul2u3"]
 [ext_resource type="Script" path="res://scripts/component/health.gd" id="3_agm4w"]
 [ext_resource type="Script" path="res://scripts/component/movement.gd" id="4_jm4by"]
+[ext_resource type="PackedScene" uid="uid://opt3xxjyeq7i" path="res://scenes/stats_ui.tscn" id="6_erhip"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vmfhj"]
 atlas = ExtResource("2_ul2u3")
@@ -50,7 +51,7 @@ scale = Vector2(3, 3)
 script = ExtResource("1_vg6tp")
 health = NodePath("HealthComponent")
 movement = NodePath("MovementComponent")
-stats = ExtResource("2_1ii8p")
+stats = ExtResource("2_4mfgi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_egiv2")
@@ -70,3 +71,16 @@ script = ExtResource("3_agm4w")
 
 [node name="MovementComponent" type="Node2D" parent="."]
 script = ExtResource("4_jm4by")
+
+[node name="StatsUI" parent="." instance=ExtResource("6_erhip")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -22.3333
+offset_top = -19.0
+offset_right = 22.6667
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0

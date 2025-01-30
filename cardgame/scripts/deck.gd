@@ -6,21 +6,32 @@ var deck: Array[CardScene] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for i in range(5):
-		const KNIGHT = preload("res://resources/cards/knight.tres")
-		const LASER = preload("res://resources/cards/laser.tres")
-
-		const CARD_SCENE  = preload("res://scenes/card.tscn")
+	const CARD_SCENE  = preload("res://scenes/card.tscn")
+	const PLAYER = preload("res://resources/characters/test/test_stats.tres")
+	
+	var player = CharacterStats.instance(PLAYER)
+	
+	for card_stats in player.starting_deck.cards:
 		var new_card = CARD_SCENE.instantiate()
-		new_card.stats = KNIGHT
+		new_card.stats = card_stats
+		#deck = player.starting_deck
 		_on_game_manager_card_added_hand(new_card)
-		
-		new_card = CARD_SCENE.instantiate()
-		new_card.stats = LASER
-		_on_game_manager_card_added_hand(new_card)
-		
 		draw_card_from_deck()
-		draw_card_from_deck()
+	
+	#for i in range(5):
+		#const KNIGHT = preload("res://resources/cards/knight.tres")
+		#const LASER = preload("res://resources/cards/laser.tres")
+#
+		#var new_card = CARD_SCENE.instantiate()
+		#new_card.stats = KNIGHT
+		#_on_game_manager_card_added_hand(new_card)
+		#
+		#new_card = CARD_SCENE.instantiate()
+		#new_card.stats = LASER
+		#_on_game_manager_card_added_hand(new_card)
+		#
+		#draw_card_from_deck()
+		#draw_card_from_deck()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
