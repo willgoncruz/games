@@ -12,13 +12,6 @@ func init(initial_health: int):
 	self.max_health = initial_health
 	health_change.emit(self)
 
-#func damage(attack: AttackStats):
-	#self.health -= attack.damage
-	#health_change.emit(self)
-#
-	#if self.health <= 0:
-		#died.emit()
-		
 func damage(damage: int):
 	self.health -= damage
 	health_change.emit(self)

@@ -1,4 +1,5 @@
 extends Node2D
+class_name Board
 
 const BOARD_SIZE = Vector2(3, 3)
 
@@ -9,11 +10,9 @@ var player: Player
 var enemies: Array[Enemy]
 var board: Array[BoardPiece]
 
-#var player_position: Vector2
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	player = get_node("Player")
+	player = get_tree().get_nodes_in_group("player")[0]
 	player.movement.shift(Vector2i(1, 1))
 
 	board.resize(2 * BOARD_SIZE.x * BOARD_SIZE.y)
@@ -28,14 +27,14 @@ func _ready() -> void:
 
 			add_child(player_board_piece)
 	
-	move_entity_to_board_position(player)
+	move_unit_to_board_position(player)
 	
 	for i in BOARD_SIZE.y:
 		var enemy = EnemyScene.instantiate()
 		enemy.stats = preload("res://resources/units/slime.tres")
 		enemy.movement.shift(Vector2i(3, i))
 		enemies.push_back(enemy)
-		move_entity_to_board_position(enemy)
+		move_unit_to_board_position(enemy)
 		add_child(enemy)
 	
 	SignalBus.play_card.connect(play_card)
@@ -59,7 +58,7 @@ func _input(event: InputEvent):
 
 	if move != Vector2i.ZERO and can_make_move(move):
 		player.movement.shift(move)
-		move_entity_to_board_position(player)
+		move_unit_to_board_position(player)
 
 func can_make_move(move: Vector2i):
 	var board_piece = get_board_piece_at(player.movement.board_position() + move)
@@ -68,14 +67,10 @@ func can_make_move(move: Vector2i):
 
 	return board_piece.usuable
 
-func move_entity_to_board_position(node: Node2D):
-	if !node.has_node("MovementComponent"):
-		pass
-
-	var movement: MovementComponent = node.get_node("MovementComponent") as MovementComponent
-	var board_piece = get_board_piece_at(movement.board_position())
+func move_unit_to_board_position(unit: Unit):
+	var board_piece = get_board_piece_at(unit.movement.board_position())
 	if board_piece != null:
-		board_piece.position_inside(node)
+		board_piece.position_inside(unit)
 
 func get_board_piece_at(position: Vector2i) -> BoardPiece:
 	return board.filter(func (piece: BoardPiece): return piece.grid_base == position).pop_front()

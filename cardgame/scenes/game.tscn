@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://digdesslh3qd7"]
+[gd_scene load_steps=12 format=3 uid="uid://digdesslh3qd7"]
 
 [ext_resource type="Script" path="res://scripts/input_manager.gd" id="1_eocp6"]
 [ext_resource type="Script" path="res://scripts/raycast.gd" id="2_fw18g"]
@@ -9,17 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://dtp5skh44ht80" path="res://scenes/player.tscn" id="6_26p62"]
 [ext_resource type="PackedScene" uid="uid://bupdpck0yhd12" path="res://scenes/board.tscn" id="7_0wl6g"]
 [ext_resource type="Script" path="res://scripts/player_manager.gd" id="9_ah00i"]
+[ext_resource type="Resource" uid="uid://br1faok38j72t" path="res://resources/characters/test/test_stats.tres" id="10_kphaq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wq3do"]
 size = Vector2(1597, 408.5)
 
 [node name="Game" type="Node2D" groups=["board", "enemies"]]
-
-[node name="Hand" parent="." instance=ExtResource("4_hb1u2")]
-offset_left = 800.0
-offset_top = 690.0
-offset_right = 800.0
-offset_bottom = 690.0
 
 [node name="InputManager" type="Node2D" parent="."]
 script = ExtResource("1_eocp6")
@@ -35,14 +30,12 @@ script = ExtResource("2_fw18g")
 collision_mask = 4
 script = ExtResource("2_fw18g")
 
-[node name="Deck" parent="." instance=ExtResource("3_8hbcr")]
-position = Vector2(150, 700)
-
 [node name="Board" parent="." instance=ExtResource("7_0wl6g")]
 z_index = -1
 position = Vector2(237, 50)
 
 [node name="Player" parent="Board" instance=ExtResource("6_26p62")]
+stats = null
 
 [node name="PlayArea" parent="." instance=ExtResource("5_mtdi2")]
 visible = false
@@ -52,20 +45,32 @@ visible = false
 position = Vector2(798.5, 204.75)
 shape = SubResource("RectangleShape2D_wq3do")
 
+[node name="Deck" parent="." instance=ExtResource("3_8hbcr")]
+position = Vector2(150, 700)
+
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("3_io8qr")
 
-[node name="Add Card" type="Button" parent="GameManager"]
+[node name="End Turn" type="Button" parent="GameManager"]
 texture_filter = 1
 offset_left = 16.0
 offset_top = 15.0
 offset_right = 147.0
 offset_bottom = 46.0
-text = "Add knight card
-"
+text = "End turn"
 
-[node name="PlayerManager" type="Node" parent="."]
+[node name="PlayerManager" type="Node" parent="." node_paths=PackedStringArray("hand", "deck", "board")]
 script = ExtResource("9_ah00i")
+hand = NodePath("../Hand")
+deck = NodePath("../Deck")
+board = NodePath("../Board")
+character_stats = ExtResource("10_kphaq")
+
+[node name="Hand" parent="." instance=ExtResource("4_hb1u2")]
+offset_left = 800.0
+offset_top = 690.0
+offset_right = 800.0
+offset_bottom = 690.0
 
 [connection signal="interact_deck" from="InputManager" to="Deck" method="_on_input_manager_interact_deck"]
 [connection signal="interact_hand" from="InputManager" to="Hand" method="_on_input_manager_interact_hand"]
@@ -74,5 +79,4 @@ script = ExtResource("9_ah00i")
 [connection signal="interact" from="InputManager/HandRaycast" to="InputManager" method="_on_hand_raycast_interact"]
 [connection signal="interact" from="InputManager/DeckRaycast" to="InputManager" method="_on_deck_raycast_interact"]
 [connection signal="interact" from="InputManager/PlayArea" to="InputManager" method="_on_play_area_interact"]
-[connection signal="card_added_hand" from="GameManager" to="Deck" method="_on_game_manager_card_added_hand"]
-[connection signal="pressed" from="GameManager/Add Card" to="GameManager" method="_on_button_pressed"]
+[connection signal="pressed" from="GameManager/End Turn" to="GameManager" method="_on_button_pressed"]

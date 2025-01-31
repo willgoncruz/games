@@ -13,6 +13,9 @@ extends Control
 
 @onready var targets: Array[Node] = []
 
+var playable = true : set = _set_playable
+var disabled = false
+
 signal hover(card: CardScene)
 signal blur(card: CardScene)
 
@@ -30,6 +33,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	
+func _set_playable(value: bool) -> void:
+	playable = value
 	
 func _input(event: InputEvent):
 	card_state_machine.on_input(event)

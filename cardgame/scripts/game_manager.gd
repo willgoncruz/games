@@ -1,18 +1,16 @@
 extends Node
+class_name GameManager
 
-const KNIGHT = preload("res://resources/cards/knight.tres")
-const LASER = preload("res://resources/cards/laser.tres")
-const CARD_SCENE  = preload("res://scenes/card.tscn")
+@export var player_stats: CharacterStats
 
-signal card_added_hand(card: CardScene)
+@onready var end_turn: Button = $"End Turn"
 
 func _ready() -> void:
-	pass
+	SignalBus.player_hand_drawn.connect(_on_player_hand_drawn)
 
 func _on_button_pressed() -> void:
-	var new_card = CARD_SCENE.instantiate()
-	new_card.stats = KNIGHT
-	card_added_hand.emit(new_card)
+	end_turn.disabled = true
+	SignalBus.player_turn_ended.emit()
 
 
 func _on_snapback_pressed() -> void:
@@ -20,3 +18,6 @@ func _on_snapback_pressed() -> void:
 
 func _on_turn_count(card: CardScene):
 	pass
+
+func _on_player_hand_drawn() -> void:
+	end_turn.disabled = false
